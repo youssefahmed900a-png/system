@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>تفاصيل العميل</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+</head>
+<body class="bg-light p-4">
+
+    <div class="container bg-white p-4 rounded shadow-sm">
+        <div class="d-flex justify-content-between align-items-center mb-4 border-bottom pb-3">
+            <h2>📋 تفاصيل العميل والشقة</h2>
+            <a href="index.html" class="btn btn-secondary">⬅️ العودة للرئيسية</a>
+        </div>
+
+        <!-- كارت البيانات -->
+        <div id="clientCard" class="row g-3 mb-4">
+            <p class="text-muted">جاري تحميل بيانات العميل...</p>
+        </div>
+
+        <!-- سجل التحديثات -->
+        <h4 class="mb-3">🗓️ سجل التحديثات اليومية</h4>
+        <div id="updatesList" class="border rounded p-3 bg-light">
+            <p class="text-muted">جاري تحميل التحديثات...</p>
+        </div>
+    </div>
+
+
+
+        <!-- Modal رفع تقرير PDF -->
+<div class="modal fade" id="uploadReportModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-primary text-white">
+        <h5 class="modal-title">📄 إضافة / رفع تقرير شغل (PDF)</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <form id="uploadReportForm">
+          <div class="mb-3">
+            <label class="form-label">عنوان التقرير:</label>
+            <input type="text" id="reportTitle" class="form-control" placeholder="مثال: تقرير التشطيبات المكتملة - أكتوبر" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">اختر ملف الـ PDF:</label>
+            <input type="file" id="reportPdfFile" class="form-control" accept="application/pdf" required>
+          </div>
+          <button type="submit" class="btn btn-primary w-100">💾 حفظ ورفع التقرير</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- ربط مكتبة Supabase وملف الجافاسكريبت الخاص بالتفاصيل -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="client-details.js"></script>
+</body>
+</html>

@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NGM Architectural Finishing - الصفحة الرئيسية</title>
+    <!-- استدعاء خط Cairo للغة العربية -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- ربط ملف CSS الخارجي -->
+    <link rel="stylesheet" href="ngm.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+    <!-- الشريط العلوي -->
+    <header class="navbar">
+        <h1>متابعة تشطيبات الشقق</h1>
+        <div class="user-info">Hello, Everyone, With Engineer Mahmoud Najm</div>
+        <img src="nagm new.png" alt="NGM Logo" width="100">
+    </header>
+
+    <!-- الحاوية الرئيسية -->
+    <div class="container">
+        <!-- بطاقات الإحصائيات -->
+        <section class="stats-grid">
+            <div class="stat-card">
+                <h3>إجمالي الشقق</h3>
+                <div class="number" id="totalClientsCount">0</div>
+            </div>
+            <div class="stat-card">
+                <h3>جاري العمل عليها</h3>
+                <div class="number" id="pendingClientsCount">0</div>
+            </div>
+            <div class="stat-card">
+                <h3>تم التسليم</h3>
+                <div class="number" id="completedClientsCount">0</div>
+            </div>
+        </section>
+
+        <!-- أزرار الإجراءات الرئيسية -->
+        <div class="panel-header" style="margin-top: 1.5rem;">
+            <h2 class="panel-title">قائمة شقق العملاء</h2>
+            <div>
+                <button class="btn btn-secondary" id="addClientBtn">+ إضافة عميل جديد</button>
+                <button class="btn" id="addUpdateBtn">+ إضافة تحديث يومي</button>
+                <button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#uploadReportModal" onclick="loadClientsForSelect()">📊 رفع تقرير شغل (PDF)</button>
+            </div>
+        </div>
+
+        <!-- شبكة المحتوى الرئيسي -->
+        <div class="content-layout">
+
+            <!-- 🟠 جدول الشقق قيد التنفيذ -->
+            <!-- جدول الشقق قيد التنفيذ -->
+<table class="data-table">
+    <thead>
+        <tr>
+            <th>كود العميل</th>
+            <th>الاسم</th>
+            <th>الهاتف</th>
+            <th>رقم,الشقة</th>
+            <th>الموقع</th>
+            <th>المرحلة</th>
+            <th>التقدم</th>
+            <th>الحالة</th>
+            <th style="text-align: center;">الإجراءات</th> <!-- 👈 أضف هذا السطر -->
+        </tr>
+    </thead>
+    <tbody id="pendingClientsTbody"></tbody>
+</table>
+
+<!-- جدول الشقق المكتملة -->
+<table class="data-table">
+    <thead>
+        <tr>
+            <th>كود العميل</th>
+            <th>الاسم</th>
+            <th>الهاتف</th>
+            <th>رقم,الشقة</th>
+            <th>الموقع</th>
+            <th>المرحلة</th>
+            <th>التقدم</th>
+            <th>الحالة</th>
+            <th style="text-align: center;">الإجراءات</th> <!-- 👈 أضف هذا السطر -->
+        </tr>
+    </thead>
+    <tbody id="completedClientsTbody"></tbody>
+</table>
+        
+            <!-- خط التحديثات الزمني العام -->
+            
+            <!--<section class="panel">
+                <div class="panel-header">
+                    <h2 class="panel-title">📅 آخر التحديثات اليومية</h2>
+                </div>
+                <ul class="timeline" id="globalTimeline">
+                    
+                    التحديثات لجميع العملاء تُعرض هنا 
+                </ul>-->
+            <!--</section>-->
+        
+
+        </div>
+    </div>
+
+    <!-- 📝 نافذة إضافة تحديث يومي -->
+    <div id="updateModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="">&times;</span>
+            <h2>إضافة تحديث يومي جديد</h2>
+            <hr style="margin: 1rem 0; border: 0; border-top: 1px solid #eee;">
+            
+            <form id="dailyUpdateForm" onsubmit="saveDailyUpdate(event)">
+                <div class="form-group">
+                    <label for="updateClientSelect">اختر العميل / الشقة:</label>
+                    <select id="updateClientSelect" required>
+                        <option value="">-- اختر العميل --</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="updateDate">التاريخ:</label>
+                    <input type="date" id="updateDate" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="updateNotes">ملاحظات والتحديثات اليومية:</label>
+                    <textarea id="updateNotes" rows="4" placeholder="اكتب الأعمال والتطورات التي تمت اليوم..." required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="updateMedia">إرفاق صورة أو فيديو (اختياري):</label>
+                    <input type="file" id="updateMedia" accept="image/*,video/*" onchange="handleMediaPreview(event)">
+                </div>
+
+                <div id="mediaPreview" class="media-preview-container" style="display: none;"></div>
+
+                <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">حفظ التحديث</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- ✏️ نافذة تعديل بيانات العميل من الصفحة الرئيسية -->
+        
+    <div id="editClientModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeEditModal()">&times;</span>
+            <h2>تعديل بيانات العميل</h2>
+            <hr style="margin: 1rem 0; border: 0; border-top: 1px solid #eee;">
+            
+            <form id="editClientForm" onsubmit="saveClientEdits(event)">
+                <input type="hidden" id="editClientId">
+                
+                <div class="form-group">
+                    <label for="editName">اسم العميل:</label>
+                    <input type="text" id="editName" required>
+                </div>
+                <div class="form-group">
+                    <label for="editPhone">رقم الهاتف:</label>
+                    <input type="text" id="editPhone" required>
+                </div>
+                <div class="form-group">
+                    <label for="editApt">رقم الشقة:</label>
+                    <input type="text" id="editApt">
+                </div>
+                <div class="form-group">
+                    <label for="editLocation">الموقع / العنوان:</label>
+                    <input type="text" id="editLocation">
+                </div>
+                <div class="form-group">
+                    <label for="editStage">المرحلة الحالية:</label>
+                    <input type="text" id="editStage">
+                </div>
+                <div class="form-group">
+                    <label for="editProgress">نسبة الإنجاز (%):</label>
+                    <input type="number" id="editProgress" min="0" max="100" required>
+                </div>
+                <div class="form-group">
+                    <label for="editStatus">الحالة:</label>
+                    <select id="editStatus">
+                        <option value="قيد التنفيذ">قيد التنفيذ</option>
+                        <option value="مكتمل">مكتمل</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">حفظ التعديلات</button>
+            </form>
+        </div>
+    </div>
+    
+                        <!-- ➕ نافذة إضافة عميل جديد -->
+        <div id="addClientModal" class="modal">
+        <div class="modal-content">
+        <span class="close-btn" onclick="closeAddClientModal()">&times;</span>
+        <h2>إضافة عميل جديد</h2>
+        <hr style="margin: 1rem 0; border: 0; border-top: 1px solid #eee;">
+        
+        <form id="addClientForm" onsubmit="saveNewClient(event)">
+            
+            <div class="form-group">
+                <label for="addName">اسم العميل:</label>
+                <input type="text" id="addName" required placeholder="ادخل اسم العميل">
+            </div>
+            <div class="form-group">
+                <label for="addPhone">رقم الهاتف:</label>
+                <input type="text" id="addPhone" required placeholder="01xxxxxxxxx">
+            </div>
+            <div class="form-group">
+                <label for="addApt">رقم الشقة:</label>
+                <input type="text" id="addApt" placeholder="مثال: 5B">
+            </div>
+            <div class="form-group">
+                <label for="addLocation">الموقع / العنوان:</label>
+                <input type="text" id="addLocation" placeholder="مثال: التجمع الخامس">
+            </div>
+            <div class="form-group">
+                <label for="addStage">المرحلة الحالية:</label>
+                <input type="text" id="addStage" placeholder="مثال: المحارة / السباكة">
+            </div>
+            <div class="form-group">
+                <label for="addProgress">نسبة الإنجاز (%):</label>
+                <input type="number" id="addProgress" min="0" max="100" value="0" required>
+            </div>
+            <div class="form-group">
+                <label for="addStatus">الحالة:</label>
+                <select id="addStatus">
+                    <option value="قيد التنفيذ" selected>قيد التنفيذ</option>
+                    <option value="مكتمل">مكتمل</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">حفظ العميل</button>
+        </form>
+    </div>
+</div>
+
+
+<div class="container my-4">
+    <h3 class="mb-3">📁 مكتبة تقارير العمل العامة</h3>
+    <div class="table-responsive">
+        <table class="table table-bordered bg-white shadow-sm">
+            <thead class="table-dark">
+                <tr>
+                    <th>عنوان التقرير</th>
+                    <th>مُعد التقرير</th>
+                    <th>تاريخ الرفع</th>
+                    <th>التقرير (PDF)</th>
+                    <th>إجراءات</th>
+                </tr>
+            </thead>
+            <tbody id="allReportsTbody">
+                <tr><td colspan="5" class="text-center">جاري تحميل التقارير...</td></tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+<!-- Modal رفع تقرير PDF مع اختيار المسؤول -->
+<div class="modal fade" id="uploadReportModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-primary text-white">
+        <h5 class="modal-title">📄 رفع تقرير سير العمل (PDF)</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <form id="uploadReportForm">
+          <div class="mb-3">
+            <label class="form-label">مسؤول التقرير (كاتب التقرير):</label>
+            <select id="reportUploaderSelect" class="form-select" required>
+              <option value="">-- اختر اسمك --</option>
+              <option value="يوسف أحمد">يوسف أحمد</option>
+              <option value="محمد علي">محمد علي</option>
+              <option value="عطية حسن">عطية حسن</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">عنوان التقرير:</label>
+            <input type="text" id="reportTitle" class="form-control" placeholder="مثال: تقرير التشطيبات الشامل" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">ملف الـ PDF:</label>
+            <input type="file" id="reportPdfFile" class="form-control" accept="application/pdf" required>
+          </div>
+          <button type="submit" class="btn btn-primary w-100">💾 رفع وحفظ التقرير</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- قسم الفوتر التعريفي بالشركة - عرض كامل -->
+<footer class="bg-dark text-white py-5 mt-5 border-top border-warning overflow-hidden">
+    <div class="container text-center">
+        
+        <!-- الصورة بعرض الشاشة أو الحجم الكبير الواضح -->
+        <div class="mb-4">
+            <img src="nagm new.png" alt="NGM Architectural Finishing" class="img-fluid rounded border border-warning shadow-lg mx-auto d-block" style="max-height: 350px; width: 100%; max-width: 800px; object-fit: contain;">
+        </div>
+
+        <!-- معلومات الشركة والنبذة المختصرة -->
+        <h3 class="text-warning fw-bold mb-3">NGM Architectural Finishing</h3>
+        <p class="text-light mx-auto mb-4" style="max-width: 700px; line-height: 1.8;">
+            شركة رائدة في مجال التصميم الهندسي والتشطيبات المتكاملة والديكورات الحديثة. نبتكر حلولاً معمارية متطورة تلبي تطلعات عملائنا بأعلى معايير الجودة والدقة والالتزام بالمواعيد.
+        </p>
+
+        <!-- الهيكل الإداري للشركة -->
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card bg-secondary bg-opacity-25 border-warning p-3">
+                    <h5 class="text-warning mb-3 border-bottom pb-2 fw-bold">👥 الهيكل الإداري للشركة</h5>
+                    <div class="d-flex justify-content-around flex-wrap gap-3" dir="ltr">
+                        <li class="text-end">🏢 <strong>CEO:</strong> ENG.Mahmoud Ngm</li>
+                        <li class="text-end">💰 <strong>CFO:</strong> ENG.Ibrahim Ali</li>
+                        <li class="text-end">⚙️ <strong>COO:</strong> ENG.Mostafa Ali</li>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- حقوق الطبع والنشر -->
+        <div class="text-center mt-4 pt-3 border-top border-secondary text-muted small">
+            جميع الحقوق محفوظة © 2026 - NGM Architectural Finishing
+        </div>
+    </div>
+</footer>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="ngm.js"></script>
+
+
+
+</body>
+</html>
+

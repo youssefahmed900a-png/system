@@ -1,0 +1,495 @@
+:root {
+    --primary-color: black;
+    --accent-color: #2563eb;
+    --accent-hover: #1d4ed8;
+    --bg-color: #f8fafc;
+    --card-bg: #ffffff;
+    --text-color: #334155;
+    --text-muted: #64748b;
+    --border-color: #e2e8f0;
+    --success-color: #16a34a;
+    --warning-color: #d97706;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Cairo', sans-serif;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+/* Navbar Style */
+.navbar {
+    background-color: var(--primary-color);
+    color: #fff;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.navbar h1 {
+    font-size: 1.4rem;
+}
+
+.user-info {
+    font-size: 0.9rem;
+    color: #cbd5e1;
+}
+
+/* Layout Container */
+.container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+/* Stats Cards */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.stat-card {
+    background: var(--card-bg);
+    padding: 1.5rem;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.stat-card h3 {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-bottom: 0.5rem;
+}
+
+.stat-card .number {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+/* Grid Layout */
+.content-layout {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 1.5rem;
+}
+
+@media (max-width: 768px) {
+    .content-layout {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Panels */
+.panel {
+    background: var(--card-bg);
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    padding: 1.5rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 0.75rem;
+}
+
+.panel-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+/* Tables */
+.table-container {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: right;
+}
+
+th, td {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--border-color);
+    font-size: 0.9rem;
+}
+
+th {
+    background-color: #f1f5f9;
+    color: var(--text-muted);
+    font-weight: 600;
+}
+
+/* Progress Bars */
+.progress-bar-bg {
+    background-color: #e2e8f0;
+    border-radius: 10px;
+    height: 8px;
+    width: 100%;
+    overflow: hidden;
+    margin-top: 4px;
+}
+
+.progress-bar-fill {
+    height: 100%;
+    border-radius: 10px;
+    background-color: var(--accent-color);
+}
+
+.progress-35 {
+    width: 35%;
+}
+
+.progress-85 {
+    width: 85%;
+}
+
+.progress-100 {
+    width: 100%;
+    background-color: var(--success-color);
+}
+
+/* Status Badges */
+.badge {
+    padding: 0.25rem 0.6rem;
+    border-radius: 50px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    display: inline-block;
+}
+
+.badge-pending {
+    background-color: #fef3c7;
+    color: var(--warning-color);
+}
+
+.badge-completed {
+    background-color: #dcfce7;
+    color: var(--success-color);
+}
+
+/* Timeline */
+.timeline {
+    list-style: none;
+    position: relative;
+}
+
+.timeline-item {
+    position: relative;
+    padding-right: 1.5rem;
+    margin-bottom: 1.5rem;
+    border-right: 2px solid var(--border-color);
+}
+
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    right: -6px;
+    top: 4px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: var(--accent-color);
+}
+
+.timeline-date {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+.timeline-title {
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin: 0.2rem 0;
+}
+
+.timeline-desc {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+/* Buttons */
+.btn {
+    background-color: var(--accent-color);
+    color: white;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: background 0.2s;
+}
+
+.btn:hover {
+    background-color: var(--accent-hover);
+}
+<!-->
+.btn-edit {
+    background-color: #f1f5f9;
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    padding: 0.25rem 0.6rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    transition: all 0.2s;
+}
+
+.btn-edit:hover {
+    background-color: var(--accent-color);
+    color: white;
+    border-color: var(--accent-color);
+}
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: var(--card-bg);
+    padding: 2rem;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 600px;
+    max-height: 85vh;
+    overflow-y: auto;
+    position: relative;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+.close-btn {
+    position: absolute;
+    left: 1.5rem;
+    top: 1rem;
+    font-size: 1.8rem;
+    cursor: pointer;
+    color: var(--text-muted);
+}
+
+.close-btn:hover {
+    color: var(--text-color);
+}
+
+
+        .modal {
+            display: none; 
+            position: fixed; 
+            z-index: 1000; 
+            left: 0; top: 0; 
+            width: 100%; height: 100%; 
+            background-color: rgba(0,0,0,0.5); 
+            align-items: center; 
+            justify-content: center;
+        }
+        .modal-content {
+            background-color: #fff; 
+            padding: 20px; 
+            border-radius: 8px; 
+            width: 90%; 
+            max-width: 550px; 
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            position: relative;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        .close-btn {
+            position: absolute; 
+            left: 15px; 
+            top: 10px; 
+            font-size: 24px; 
+            cursor: pointer;
+            color: #aaa;
+        }
+        .close-btn:hover { color: #000; }
+        .form-group { margin-bottom: 12px; }
+        .form-group label { display: block; margin-bottom: 4px; font-weight: 600; font-size: 0.9rem; }
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;
+            font-family: 'Cairo', sans-serif;
+        }
+        .media-preview-container {
+            margin-top: 10px;
+            max-height: 150px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px dashed #ccc;
+            border-radius: 4px;
+        }
+        .media-preview-container img, .media-preview-container video {
+            max-width: 100%;
+            max-height: 140px;
+        }
+
+        .timeline { list-style: none; padding: 0; margin: 0; }
+        .timeline-item { border-right: 3px solid #2563eb; padding-right: 12px; margin-bottom: 15px; position: relative; }
+        .timeline-date { font-size: 0.8rem; color: #64748b; font-weight: bold; }
+        .timeline-title { font-weight: bold; color: #0f172a; margin: 2px 0; }
+        .timeline-desc { font-size: 0.9rem; color: #334155; margin-top: 4px; }
+        .timeline-media { margin-top: 8px; max-width: 100%; border-radius: 6px; }
+
+        /* تنسيق جدول العملاء واستجابة الماوس */
+        table tbody tr.clickable-row {
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+        table tbody tr.clickable-row:hover {
+            background-color: #f1f5f9 !important;
+        }
+        .client-name-text {
+            color: #2563eb;
+            font-weight: 700;
+        }
+
+        /* تنسيق أزرار الإجراءات داخل الجدول */
+        .action-btns-cell {
+            display: flex;
+            gap: 6px;
+            justify-content: center;
+        }
+        .btn-action-sm {
+            padding: 4px 8px;
+            font-size: 0.8rem;
+            border-radius: 4px;
+            border: none;
+            cursor: pointer;
+            font-family: 'Cairo', sans-serif;
+        }
+        .btn-edit-sm {
+            background-color: #2563eb;
+            color: white;
+        }
+        .btn-edit-sm:hover {
+            background-color: #1d4ed8;
+        }
+        .btn-delete-sm {
+            background-color: #dc2626;
+            color: white;
+        }
+        .btn-delete-sm:hover {
+            background-color: #b91c1c;
+        }
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        /* تنسيقات خاصة بالشاشات الصغيرة (الموبايل) */
+@media (max-width: 768px) {
+  
+  /* تقليل حجم الخط في الرأس (Header) */
+  header {
+    padding: 10px 0; /* تقليل الفراغ العلوي والسفلي */
+  }
+  
+  header h1 {
+    font-size: 1.5rem !important; /* تقليل حجم عنوان "متابعة تشطيبات الشقق" */
+    margin-bottom: 5px !important;
+  }
+  
+  header p {
+    font-size: 0.9rem !important; /* تقليل حجم نص الترحيب */
+    margin-bottom: 0 !important;
+  }
+
+  /* تصغير الشعار */
+  header img {
+    max-height: 60px !important; /* تحديد حد أقصى لارتفاع الشعار */
+    width: auto !important;
+  }
+}
+@media (max-width: 768px) {
+  /* ... الكود السابق من الخطوة 1 ... */
+
+  /* جعل حاويات البطاقات (Stats and Lists) تأخذ عرض الشاشة بالكامل */
+  .stats-container, .list-container {
+    padding: 10px !important;
+  }
+
+  /* جعل البطاقات (الإحصائيات وقائمة الشقق) مرنة */
+  .stat-card, .apartment-card {
+    width: 100% !important; /* تأخذ العرض المتاح بالكامل */
+    margin-bottom: 10px !important; /* فراغ بين كل بطاقة */
+    padding: 15px !important; /* تقليل الفراغ الداخلي للبطاقة */
+  }
+  
+  /* تصغير حجم نصوص وعناوين البطاقات */
+  .stat-card h3, .apartment-card h3 {
+    font-size: 1.1rem !important;
+  }
+  
+  .stat-card p, .apartment-card p {
+    font-size: 0.9rem !important;
+  }
+  
+  .stat-card h2, .apartment-card h2 {
+    font-size: 1.8rem !important; /* تصغير الأرقام الكبيرة (الـ 0 والـ 0) */
+  }
+}
+@media (max-width: 768px) {
+  /* ... الأكواد السابقة من الخطوة 1 و 2 ... */
+
+  /* جعل الأزرار (أزرق) تأخذ عرض الشاشة بالكامل ليسهل الضغط عليها */
+  .add-client-btn, .add-daily-update-btn {
+    width: 100% !important;
+    display: block !important;
+    margin-bottom: 15px !important; /* فراغ بين الأزرار */
+    font-size: 1rem !important; /* تكبير حجم خط النص داخل الزر */
+    padding: 12px !important; /* تكبير الفراغ الداخلي للزر */
+  }
+
+  /* جعل عنوان قائمة الشقق/العملاء يتناسب مع الموبايل */
+  .client-list h2, .apartments-list h2 {
+    font-size: 1.3rem !important;
+    text-align: center !important; /* توسيط العنوان */
+  }
+}
