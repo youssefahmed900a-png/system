@@ -423,73 +423,118 @@ th {
 
 
 
-        /* تنسيقات خاصة بالشاشات الصغيرة (الموبايل) */
+        /* ========================================================== */
+/*           تنسيقات وإصلاحات التجاوب مع الموبايل (Responsive)         */
+/* ========================================================== */
+
 @media (max-width: 768px) {
   
-  /* تقليل حجم الخط في الرأس (Header) */
-  header {
-    padding: 10px 0; /* تقليل الفراغ العلوي والسفلي */
-  }
-  
-  header h1 {
-    font-size: 1.5rem !important; /* تقليل حجم عنوان "متابعة تشطيبات الشقق" */
-    margin-bottom: 5px !important;
-  }
-  
-  header p {
-    font-size: 0.9rem !important; /* تقليل حجم نص الترحيب */
-    margin-bottom: 0 !important;
+  /* 1. الشريط العلوي (Navbar Header) */
+  .navbar {
+    flex-direction: column !important;
+    text-align: center !important;
+    padding: 15px 10px !important;
   }
 
-  /* تصغير الشعار */
-  header img {
-    max-height: 60px !important; /* تحديد حد أقصى لارتفاع الشعار */
-    width: auto !important;
-  }
-}
-@media (max-width: 768px) {
-  /* ... الكود السابق من الخطوة 1 ... */
-
-  /* جعل حاويات البطاقات (Stats and Lists) تأخذ عرض الشاشة بالكامل */
-  .stats-container, .list-container {
-    padding: 10px !important;
+  .navbar h1 {
+    font-size: 1.4rem !important;
+    margin-bottom: 8px !important;
   }
 
-  /* جعل البطاقات (الإحصائيات وقائمة الشقق) مرنة */
-  .stat-card, .apartment-card {
-    width: 100% !important; /* تأخذ العرض المتاح بالكامل */
-    margin-bottom: 10px !important; /* فراغ بين كل بطاقة */
-    padding: 15px !important; /* تقليل الفراغ الداخلي للبطاقة */
+  .navbar .user-info {
+    font-size: 0.85rem !important;
+    margin-bottom: 8px !important;
   }
-  
-  /* تصغير حجم نصوص وعناوين البطاقات */
-  .stat-card h3, .apartment-card h3 {
-    font-size: 1.1rem !important;
-  }
-  
-  .stat-card p, .apartment-card p {
-    font-size: 0.9rem !important;
-  }
-  
-  .stat-card h2, .apartment-card h2 {
-    font-size: 1.8rem !important; /* تصغير الأرقام الكبيرة (الـ 0 والـ 0) */
-  }
-}
-@media (max-width: 768px) {
-  /* ... الأكواد السابقة من الخطوة 1 و 2 ... */
 
-  /* جعل الأزرار (أزرق) تأخذ عرض الشاشة بالكامل ليسهل الضغط عليها */
-  .add-client-btn, .add-daily-update-btn {
+  .navbar img {
+    max-width: 70px !important;
+    height: auto !important;
+    margin: 0 auto !important;
+  }
+
+  /* 2. بطاقات الإحصائيات (Stats Cards) */
+  .stats-grid {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 10px !important;
+    padding: 0 10px !important;
+  }
+
+  .stat-card {
     width: 100% !important;
-    display: block !important;
-    margin-bottom: 15px !important; /* فراغ بين الأزرار */
-    font-size: 1rem !important; /* تكبير حجم خط النص داخل الزر */
-    padding: 12px !important; /* تكبير الفراغ الداخلي للزر */
+    margin: 0 !important;
+    padding: 12px !important;
   }
 
-  /* جعل عنوان قائمة الشقق/العملاء يتناسب مع الموبايل */
-  .client-list h2, .apartments-list h2 {
-    font-size: 1.3rem !important;
-    text-align: center !important; /* توسيط العنوان */
+  .stat-card h3 {
+    font-size: 1rem !important;
+  }
+
+  .stat-card .number {
+    font-size: 1.6rem !important;
+  }
+
+  /* 3. أزرار الإجراءات الرئيسية */
+  .panel-header {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    padding: 0 10px !important;
+  }
+
+  .panel-header h2.panel-title {
+    font-size: 1.2rem !important;
+    text-align: center !important;
+    margin-bottom: 12px !important;
+  }
+
+  /* جعل الأزرار تأخذ عرض الشاشة بالكامل ليسهل النقر عليها */
+  .panel-header div {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 10px !important;
+    width: 100% !important;
+  }
+
+  .panel-header .btn {
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 10px !important;
+    font-size: 0.95rem !important;
+  }
+
+  /* 4. الجداول وجعلها قابلة للتمرير الأفقي بدون أن تكسر الشاشة */
+  .data-table, .table {
+    display: block !important;
+    width: 100% !important;
+    overflow-x: auto !important;
+    white-space: nowrap !important;
+    font-size: 0.85rem !important;
+  }
+
+  /* 5. الفوتر (Footer) والهيكل الإداري */
+  footer {
+    padding: 20px 10px !important;
+  }
+
+  footer img {
+    max-height: 200px !important;
+    max-width: 100% !important;
+  }
+
+  footer h3 {
+    font-size: 1.2rem !important;
+  }
+
+  footer p {
+    font-size: 0.85rem !important;
+    padding: 0 10px !important;
+  }
+
+  /* ترتيب أعضاء الإدارة تحت بعضهم بوضع مريح */
+  footer .d-flex {
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 8px !important;
   }
 }

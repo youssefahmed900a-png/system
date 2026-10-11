@@ -187,3 +187,145 @@ body {
         .timeline-desc { font-size: 0.95rem; color: #334155; line-height: 1.6; background: #f8fafc; padding: 10px 12px; border-radius: 6px; }
         .timeline-media-box img { max-width: 100%; max-height: 280px; border-radius: 8px; border: 1px solid #cbd5e1; margin-top: 8px; object-fit: cover; }
     
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        /* ========================================================== */
+/*           تنسيقات وإصلاحات التجاوب مع الموبايل (Responsive)         */
+/* ========================================================== */
+
+@media (max-width: 768px) {
+  
+  /* 1. الشريط العلوي (Navbar Header) */
+  .navbar {
+    flex-direction: column !important;
+    text-align: center !important;
+    padding: 15px 10px !important;
+  }
+
+  .navbar h1 {
+    font-size: 1.4rem !important;
+    margin-bottom: 8px !important;
+  }
+
+  .navbar .user-info {
+    font-size: 0.85rem !important;
+    margin-bottom: 8px !important;
+  }
+
+  .navbar img {
+    max-width: 70px !important;
+    height: auto !important;
+    margin: 0 auto !important;
+  }
+
+  /* 2. بطاقات الإحصائيات (Stats Cards) */
+  .stats-grid {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 10px !important;
+    padding: 0 10px !important;
+  }
+
+  .stat-card {
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 12px !important;
+  }
+
+  .stat-card h3 {
+    font-size: 1rem !important;
+  }
+
+  .stat-card .number {
+    font-size: 1.6rem !important;
+  }
+
+  /* 3. أزرار الإجراءات الرئيسية */
+  .panel-header {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    padding: 0 10px !important;
+  }
+
+  .panel-header h2.panel-title {
+    font-size: 1.2rem !important;
+    text-align: center !important;
+    margin-bottom: 12px !important;
+  }
+
+  /* جعل الأزرار تأخذ عرض الشاشة بالكامل ليسهل النقر عليها */
+  .panel-header div {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 10px !important;
+    width: 100% !important;
+  }
+
+  .panel-header .btn {
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 10px !important;
+    font-size: 0.95rem !important;
+  }
+
+  /* 4. الجداول وجعلها قابلة للتمرير الأفقي بدون أن تكسر الشاشة */
+  .data-table, .table {
+    display: block !important;
+    width: 100% !important;
+    overflow-x: auto !important;
+    white-space: nowrap !important;
+    font-size: 0.85rem !important;
+  }
+
+  /* 5. الفوتر (Footer) والهيكل الإداري */
+  footer {
+    padding: 20px 10px !important;
+  }
+
+  footer img {
+    max-height: 200px !important;
+    max-width: 100% !important;
+  }
+
+  footer h3 {
+    font-size: 1.2rem !important;
+  }
+
+  footer p {
+    font-size: 0.85rem !important;
+    padding: 0 10px !important;
+  }
+
+  /* ترتيب أعضاء الإدارة تحت بعضهم بوضع مريح */
+  footer .d-flex {
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 8px !important;
+  }
+}
